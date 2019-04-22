@@ -98,12 +98,15 @@
 
   <meta property="og:type" content="article">
 <meta property="og:title" content="玩转Linux">
-<meta property="og:url" content="http://yoursite.com/2018/05/30/linux_basic/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/Linux_basic/index.html">
 <meta property="og:site_name" content="Maggie&#39;s Blog">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-04-16T09:40:41.572Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/16626645-d1c9bda971bbb15b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/16626645-2479825d727650f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-04-22T13:11:55.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="玩转Linux">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/16626645-d1c9bda971bbb15b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -111,7 +114,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2018/05/30/linux_basic/">
+  <link rel="canonical" href="http://yoursite.com/2018/05/30/Linux_basic/">
 
 
 
@@ -303,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/linux_basic/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/Linux_basic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Maggie Wu">
@@ -408,20 +411,22 @@
       
         <hr>
 <a id="more"></a>
-<h2 id="linux介绍"><a href="#linux介绍" class="headerlink" title="linux介绍"></a>linux介绍</h2><h3 id="计算机常识"><a href="#计算机常识" class="headerlink" title="计算机常识"></a>计算机常识</h3><ol>
+<h3 id="1-计算机常识"><a href="#1-计算机常识" class="headerlink" title="1.计算机常识"></a>1.计算机常识</h3><ol>
 <li>计算机由硬件和软件构成</li>
 <li>计算机硬件的五大部件：运算器、控制器、存储器输入设备、输出设备</li>
 <li>计算机软件：系统软件（操作系统、编译程序）和应用软件</li>
-<li>操作系统会负责管理和操作硬件，并提供简单的人机交互的接口<h3 id="linux简介"><a href="#linux简介" class="headerlink" title="linux简介"></a>linux简介</h3></li>
+<li>操作系统会负责管理和操作硬件，并提供简单的人机交互的接口</li>
 </ol>
-<h4 id="Linux概述"><a href="#Linux概述" class="headerlink" title="Linux概述"></a>Linux概述</h4><p>Linux是一个通用操作系统。一个操作系统要负责任务调度、内存分配、处理外围设备I/O等操作。操作系统通常由内核和系统程序（设备驱动、底层库、shell、服务程序等）两部分组成。</p>
+<h3 id="2-linux简介"><a href="#2-linux简介" class="headerlink" title="2. linux简介"></a>2. linux简介</h3><h4 id="2-1-Linux概述"><a href="#2-1-Linux概述" class="headerlink" title="2.1 Linux概述"></a>2.1 Linux概述</h4><p>Linux是一个通用操作系统。一个操作系统要负责任务调度、内存分配、处理外围设备I/O等操作。操作系统通常由内核和系统程序（设备驱动、底层库、shell、服务程序等）两部分组成。</p>
 <p>Linux内核是芬兰人Linus Torvalds开发的，于1991年9月发布。而Linux操作系统作为Internet时代的产物，它是由全世界许多开发者共同合作开发的，是一个自由的操作系统（注意是自由不是免费）。</p>
-<h4 id="linux-优点"><a href="#linux-优点" class="headerlink" title="linux 优点"></a>linux 优点</h4><ul>
+<h4 id="2-2-Linux-优点"><a href="#2-2-Linux-优点" class="headerlink" title="2.2 Linux 优点"></a>2.2 Linux 优点</h4><ul>
 <li>通用操作系统，不跟特定的硬件绑定。</li>
 <li>用C语言编写，有可移植性，有内核编程接口。</li>
 <li>支持多用户和多任务，支持安全的分层文件系统。</li>
 <li>大量的实用程序，完善的网络功能以及强大的支持文档。</li>
-<li>可靠的安全性和良好的稳定性，对开发者更友好。<h4 id="linux-发展史"><a href="#linux-发展史" class="headerlink" title="linux 发展史"></a>linux 发展史</h4><ul>
+<li>可靠的安全性和良好的稳定性，对开发者更友好。</li>
+</ul>
+<h4 id="2-3-Linux-发展史"><a href="#2-3-Linux-发展史" class="headerlink" title="2.3 Linux 发展史"></a>2.3 Linux 发展史</h4><ul>
 <li>Ken Thompson / Dennis Ritchie —&gt; Unix (1970s)</li>
 <li>Xerox（施乐） —&gt; GUI / 鼠标 / 以太网</li>
 <li>1980s — IBM PC</li>
@@ -429,39 +434,55 @@
 <li>Unix —&gt; System V —&gt; Solaris (SUN)</li>
 <li>Uinx —&gt; System III —&gt; HP-UX (HP)</li>
 <li>Unix —&gt; BSD —&gt; FreeBSD —&gt; Macintosh (Apple) —&gt; macOS —&gt; iOS / watchOS / tvOS</li>
-<li>Unix —&gt; Minix (Andrew Tanenbaum) —&gt; Linux (Linus Torvalds) —&gt; Android (Google)<h4 id="linux-发型版本"><a href="#linux-发型版本" class="headerlink" title="linux 发型版本"></a>linux 发型版本</h4></li>
+<li>Unix —&gt; Minix (Andrew Tanenbaum) —&gt; Linux (Linus Torvalds) —&gt; Android (Google)</li>
+</ul>
+<h4 id="2-4-linux-发型版本"><a href="#2-4-linux-发型版本" class="headerlink" title="2.4 linux 发型版本"></a>2.4 linux 发型版本</h4><ul>
 <li>Redhat</li>
 <li>Ubuntu — 个人</li>
 <li>CentOS — 服务器 — 远程访问</li>
 <li>Fedora</li>
 <li>SUSE</li>
-<li>Debian<h4 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h4></li>
+<li>Debian</li>
 </ul>
-</li>
+<h4 id="2-5-操作系统"><a href="#2-5-操作系统" class="headerlink" title="2.5 操作系统"></a>2.5 操作系统</h4><ul>
 <li>个人操作系统 - Windows / macOS</li>
 <li>服务器操作系统 - 商用Unix / Linux / Windows Server</li>
 </ul>
-<ol start="9">
-<li>要求：基本使用 / 安装和配置服务 / 部署项目</li>
-</ol>
 <hr>
-<h2 id="linux常用命令"><a href="#linux常用命令" class="headerlink" title="linux常用命令"></a>linux常用命令</h2><p>Linux系统的命令通常都是如下所示的格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">命令 [命令的参数] [命令作用的对象]</span><br></pre></td></tr></table></figure>
+<h3 id="3-Linux基础命令"><a href="#3-Linux基础命令" class="headerlink" title="3. Linux基础命令"></a>3. Linux基础命令</h3><p>Linux系统的命令通常都是如下所示的格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">命令名称 [命令的参数] [命令作用的对象]</span><br></pre></td></tr></table></figure>
 <p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ls  -laR .pip</span><br><span class="line">cat /proc/cpuinfo</span><br><span class="line">cat -n	/proc/cpuinfo</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>who / w / last / whoami   查看最近登录</li>
+<li>who / w / last / who am i   查看最近登录</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# w</span><br><span class="line"> 23:31:16 up 12:16,  2 users,  load average: 0.00, 0.01, 0.05</span><br><span class="line">USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT</span><br><span class="line">root     pts/0    182.139.66.250   23:03    4.00s  0.02s  0.00s w</span><br><span class="line">jackfrue pts/1    182.139.66.250   23:26    3:56   0.00s  0.00s -bash</span><br><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# who</span><br><span class="line">root     pts/0        2018-04-12 23:03 (182.139.66.250)</span><br><span class="line">jackfrued pts/1        2018-04-12 23:26 (182.139.66.250)</span><br><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# who am i</span><br><span class="line">root     pts/0        2018-04-12 23:03 (182.139.66.250)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看自己使用的Shell - ps</li>
+</ul>
+<p>Shell也被称为“壳”，它是用户与内核交流的翻译官，简单的说就是人与计算机交互的接口。目前很多Linux系统默认的Shell都是bash（Bourne Again SHell），因为它可以使用Tab键进行命令补全、可以保存历史命令、可以方便的配置环境变量以及执行批处理操作等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# ps</span><br><span class="line">  PID TTY          TIME CMD</span><br><span class="line"> 3531 pts/0    00:00:00 bash</span><br><span class="line"> 3553 pts/0    00:00:00 ps</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看命令的说明 - whatis</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# whatis ps</span><br><span class="line">ps (1)        - report a snapshot of the current processes.</span><br><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# whatis python</span><br><span class="line">python (1)    - an interpreted, interactive, object-oriented programming language</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看命令的位置 - which / whereis。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# whereis ps</span><br><span class="line">ps: /usr/bin/ps /usr/share/man/man1/ps.1.gz</span><br><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# whereis python</span><br><span class="line">python: /usr/bin/python /usr/bin/python2.7 /usr/lib/python2.7 /usr/lib64/python2.7 /etc/python /usr/include/python2.7 /usr/share/man/man1/python.1.gz</span><br><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# which ps</span><br><span class="line">/usr/bin/ps</span><br><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# which python</span><br><span class="line">/usr/bin/python</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看帮助文档 - man / info / apropos</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# ps --help</span><br><span class="line">Usage:</span><br><span class="line"> ps [options]</span><br><span class="line"> Try &apos;ps --help &lt;simple|list|output|threads|misc|all&gt;&apos;</span><br><span class="line">  or &apos;ps --help &lt;s|l|o|t|m|a&gt;&apos;</span><br><span class="line"> for additional help text.</span><br><span class="line">For more details see ps(1).</span><br><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# man ps</span><br><span class="line">PS(1)                                User Commands                                PS(1)</span><br><span class="line">NAME</span><br><span class="line">       ps - report a snapshot of the current processes.</span><br><span class="line">SYNOPSIS</span><br><span class="line">       ps [options]</span><br><span class="line">DESCRIPTION</span><br><span class="line">...</span><br><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# info ps</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <ul>
 <li>adduser / passwd / userdel 创建用户、修改密码、删除用户</li>
 <li>su 用户名  切换用户(switch user)</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@izwz97tbgo9lkabnat2lo8z ~]# su hellokitty</span><br><span class="line">[hellokitty@izwz97tbgo9lkabnat2lo8z root]$</span><br></pre></td></tr></table></figure>
 <ul>
+<li>logout / exit 退出登录</li>
 <li>date / cal 查看日期日历</li>
 <li>write / wall / mesg  发消息   （ctrl + d 结束会话）</li>
 <li>clear 清除屏幕</li>
-<li>logout / exit 退出登录</li>
 <li>history 查看历史命令<ul>
 <li>! 命令编号 再执行该命令\键盘上下箭头</li>
 <li>history -c  清除历史命令</li>
@@ -470,13 +491,13 @@
 <li>reboot 重启系统(init 6)</li>
 <li>shutdown 关机 (init 0)</li>
 </ul>
-<h2 id="linux文件和文件夹操作"><a href="#linux文件和文件夹操作" class="headerlink" title="linux文件和文件夹操作"></a>linux文件和文件夹操作</h2><ul>
+<h3 id="4-linux文件和文件夹操作"><a href="#4-linux文件和文件夹操作" class="headerlink" title="4. linux文件和文件夹操作"></a>4. linux文件和文件夹操作</h3><ul>
 <li>pwd 打印工作目录（print working directory）</li>
-<li>cd   改变目录（change directory ）<ul>
-<li>相对路径和绝对路径</li>
+<li>cd   切换目录（change directory ）<ul>
+<li>注意相对路径和绝对路径</li>
 </ul>
 </li>
-<li>ls - list dictionary 列出目录下的内容<ul>
+<li>ls 列出目录下的内容( list dictionary )<ul>
 <li>-l 长格式查看</li>
 <li>-a 查看所有文件（隐藏文件）<ul>
 <li>在linux中以点开头的文件和文件夹是隐藏的</li>
@@ -486,10 +507,10 @@
 <li>-n </li>
 </ul>
 </li>
-<li>cat - concatenate 查看文件内容（连接多个文件）</li>
+<li>cat - 查看文件内容（连接多个文件）concatenate</li>
 <li>touch 创建空文件或者修改已有文件的最后访问时间</li>
 <li>mkdir  创建文件夹（make dictionary）<ul>
-<li>-p 如果没有父文件时要创建子文件</li>
+<li>-p 当没有父文件时要创建子文件</li>
 </ul>
 </li>
 <li>rm 删除(remove)<ul>
@@ -536,13 +557,33 @@
 </ul>
 </li>
 <li>diff - different - 比较文件的差别</li>
-<li>竖线 管道(将多个进程连接起来、把前一个命令的输出作为下一个命令的输入)</li>
+<li>| 管道(将多个进程连接起来、把前一个命令的输出作为下一个命令的输入)</li>
 <li>一个大于号 输入重定向</li>
 <li>两个大于号 追加输出重定向</li>
 <li>2&gt; 错误输出重定向</li>
 <li>2&gt;&gt; 错误追加重定向</li>
+<li>cp - copy - 拷贝文件</li>
+<li>mv - move - 移动文件（同一个路径下移动相当于是重命名操作）</li>
 </ul>
-<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">例子：将目录A重命名为B</span><br><span class="line"></span><br><span class="line">mv A B</span><br><span class="line"></span><br><span class="line">例子：将/a目录移动到/b下，并重命名为c</span><br><span class="line"></span><br><span class="line">mv /a /b/c</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查找命令（文件操作）<ul>
+<li>grep  搜索字符串（支持正则）</li>
+<li>find 搜索文件<ul>
+<li>name 根据名字搜索</li>
+<li>size 根据大小搜索</li>
+<li>atime 根据类型搜索 d/f/l/s</li>
+<li>mtime 最后修改时间</li>
+<li>ctime 创建时间</li>
+<li>atime 最后访问时间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>chown 改变文件所有者<br><img src="https://upload-images.jianshu.io/upload_images/16626645-d1c9bda971bbb15b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+<li>chmod 改变文件可执行权限</li>
+</ul>
+<h3 id="5-目录结构"><a href="#5-目录结构" class="headerlink" title="5. 目录结构"></a>5. 目录结构</h3><ol>
 <li>/bin - 基本命令的二进制文件</li>
 <li>/boot - 引导加载程序的静态文件</li>
 <li>/dev - 设备文件</li>
@@ -563,7 +604,7 @@
 <li>/usr - 用户应用目录</li>
 <li>/var - 变量数据目录</li>
 </ol>
-<h2 id="linux-系统下的软件安装"><a href="#linux-系统下的软件安装" class="headerlink" title="linux 系统下的软件安装"></a>linux 系统下的软件安装</h2><ol>
+<h3 id="6-linux-系统下的软件安装"><a href="#6-linux-系统下的软件安装" class="headerlink" title="6. linux 系统下的软件安装"></a>6. linux 系统下的软件安装</h3><ul>
 <li>包管理工具 - yum / rpm / apt<ul>
 <li>yum search nginx - 从默认的仓库搜索有没有指定的软件</li>
 <li>yum install -y nginx - 安装软件</li>
@@ -573,56 +614,32 @@
 <li>yum update nginx - 更新软件</li>
 </ul>
 </li>
-</ol>
-<h2 id="源代码构建安装py3-7"><a href="#源代码构建安装py3-7" class="headerlink" title="源代码构建安装py3.7"></a>源代码构建安装py3.7</h2><ol>
-<li>下载wget <a href="https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tar.xz" target="_blank" rel="noopener">https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tar.xz</a></li>
-<li>解压缩和解归档<ul>
-<li>xz -d Python-3.7.3.tar.xz</li>
-<li>tar -xvf Python-3.7.3.tar</li>
 </ul>
-</li>
-<li>补充依赖库<ul>
-<li>yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel</li>
-</ul>
-</li>
-<li>进入Python源代码目录安装前准备工作<ul>
-<li>cd Python-3.7.3</li>
-<li>./configure –prefix=/usr/local/python37–enable-optimizations</li>
-</ul>
-</li>
-<li>构建和安装<ul>
-<li>make &amp;&amp; make install</li>
-</ul>
-</li>
-<li>注册PATH环境变量<ul>
-<li>cd ~</li>
-<li>vim .bash_profile</li>
-<li>PATH=…:/usr/local/python37/bin</li>
-</ul>
-</li>
-<li>激活环境变量<ul>
-<li>source .bash_profile</li>
-</ul>
-</li>
-<li>测试安装是否成功<ul>
-<li>python3 –version</li>
-</ul>
-</li>
-</ol>
-<h2 id="Vim的使用"><a href="#Vim的使用" class="headerlink" title="Vim的使用"></a>Vim的使用</h2><ol>
+<h3 id="7-Vim的使用"><a href="#7-Vim的使用" class="headerlink" title="7. Vim的使用"></a>7. Vim的使用</h3><ol>
 <li>启动vim<ul>
 <li>vim 文件名</li>
 </ul>
 </li>
-<li>vim的三种模式：<ul>
+<li><p>vim的三种模式：</p>
+<ul>
 <li>命令模式 - 按键代表命令<ul>
 <li>—i或者a—&gt;编辑模式</li>
 <li>—:或者/—&gt; 末行模式</li>
-<li>命令模式相关操作</li>
+</ul>
+</li>
+<li>编辑模式- 键入内容 —Esc—&gt; 命令模式</li>
+</ul>
+<ul>
+<li>末行模式 - 搜索/配置/执行系统命令 —Enter—&gt; 命令模式<ul>
+<li>set nu - 显示行号 - set nonu</li>
+<li>syntax on - 显示高亮语法 - syntax off</li>
+<li>set ts=4 - 修改制表键的空格数</li>
+<li>set ruler - 显示光标所在的位置 - set noruler</li>
 </ul>
 </li>
 </ul>
 </li>
+<li>命令模式下的相关操作</li>
 </ol>
 <table>
 <thead>
@@ -724,15 +741,55 @@
 </tr>
 </tbody>
 </table>
+<ol start="4">
+<li><p>映射快捷键：(在.vimrc添加)</p>
 <ul>
-<li>编辑模式- 键入内容 —Esc—&gt; 命令模式</li>
-<li>末行模式 - 搜索/配置/执行系统命令 —Enter—&gt; 命令模式<ul>
-<li>set nu - 显示行号 - set nonu</li>
-<li>syntax on - 显示高亮语法 - syntax off</li>
-<li>set ts=4 - 修改制表键的空格数</li>
-<li>set ruler - 显示光标所在的位置 - set noruler</li>
+<li>map <f2> gg99999dd  (删除所有代码)</f2></li>
+<li>inoremap <strong>main if </strong>name__ == ‘<strong>main</strong>‘:</li>
 </ul>
 </li>
+<li><p>多文件操作：</p>
+<ul>
+<li>:ls 查看所有打开的文件</li>
+<li>:b 数字      指定显示哪个文件</li>
+<li>:vs 垂直拆分</li>
+<li>:sp 水平拆分</li>
+<li>Ctrl + w 两次 切换窗口</li>
+<li>:qa 退出所有窗口</li>
+<li>vim -d 文件1 文件2  打开多文件进行版本比较</li>
+</ul>
+</li>
+<li><p>vim查找（命令模式下）（支持正则）</p>
+<ul>
+<li>/ enter 从上往下搜      <ul>
+<li>n是往下  N是往上</li>
+</ul>
+</li>
+<li>? enter 从下往上查找</li>
+</ul>
+</li>
+<li><p>vim替换（末行模式）</p>
+<ul>
+<li>1,$ 第一行到最后一行</li>
+<li>c    confirm</li>
+<li>g   global(一行出现多处匹配全部找出)</li>
+<li>i   ignore case  忽略大小写<br>例如：全文替换idx 为index 在确认后替换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1,$/s/idx/index/c</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>宏操作</p>
+</li>
+</ol>
+<ul>
+<li>命令模式下 按 qa  (a是寄存器的名字)开始录制宏<br><img src="https://upload-images.jianshu.io/upload_images/16626645-2479825d727650f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+<li>播放宏：<br>数字(代表播放几遍)  @a(a是寄存器的名字)</li>
+</ul>
+<ol start="9">
+<li>shell</li>
+</ol>
+<ul>
+<li>执行或者测试多个命令</li>
+<li>python完全可以替代</li>
 </ul>
 
       
@@ -947,7 +1004,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux介绍"><span class="nav-number">1.</span> <span class="nav-text">linux介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机常识"><span class="nav-number">1.1.</span> <span class="nav-text">计算机常识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux简介"><span class="nav-number">1.2.</span> <span class="nav-text">linux简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">Linux概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#linux-优点"><span class="nav-number">1.2.2.</span> <span class="nav-text">linux 优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#linux-发展史"><span class="nav-number">1.2.3.</span> <span class="nav-text">linux 发展史</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#linux-发型版本"><span class="nav-number">1.2.4.</span> <span class="nav-text">linux 发型版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作系统"><span class="nav-number">1.2.5.</span> <span class="nav-text">操作系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux常用命令"><span class="nav-number">2.</span> <span class="nav-text">linux常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux文件和文件夹操作"><span class="nav-number">3.</span> <span class="nav-text">linux文件和文件夹操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统"><span class="nav-number">4.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-number">4.1.</span> <span class="nav-text">目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-系统下的软件安装"><span class="nav-number">5.</span> <span class="nav-text">linux 系统下的软件安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码构建安装py3-7"><span class="nav-number">6.</span> <span class="nav-text">源代码构建安装py3.7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vim的使用"><span class="nav-number">7.</span> <span class="nav-text">Vim的使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-计算机常识"><span class="nav-number">1.</span> <span class="nav-text">1.计算机常识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-linux简介"><span class="nav-number">2.</span> <span class="nav-text">2. linux简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-Linux概述"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Linux概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-Linux-优点"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Linux 优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Linux-发展史"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 Linux 发展史</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-linux-发型版本"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 linux 发型版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-操作系统"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 操作系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Linux基础命令"><span class="nav-number">3.</span> <span class="nav-text">3. Linux基础命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-linux文件和文件夹操作"><span class="nav-number">4.</span> <span class="nav-text">4. linux文件和文件夹操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-目录结构"><span class="nav-number">5.</span> <span class="nav-text">5. 目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-linux-系统下的软件安装"><span class="nav-number">6.</span> <span class="nav-text">6. linux 系统下的软件安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Vim的使用"><span class="nav-number">7.</span> <span class="nav-text">7. Vim的使用</span></a></li></ol></div>
             
 
           </div>
