@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="搞定SQL">
+<meta property="og:url" content="http://yoursite.com/2018/09/16/sql01/index.html">
+<meta property="og:site_name" content="Maggie&#39;s Blog">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/16626645-37289b825743bdde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/16626645-d10dddf25dce47ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/16626645-35f0a66c34e112b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/16626645-8dfab6d2dd32fca2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/16626645-ba27de3a56b51d48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/16626645-3442589caef34a61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/16626645-136ec897e968aabe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/16626645-37d9f4c5f586a555.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-04-24T12:00:02.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搞定SQL">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/16626645-37289b825743bdde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2018/09/16/sql01/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>搞定SQL | Maggie's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Maggie's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/16/sql01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Maggie Wu">
+      <meta itemprop="description" content="ever tried, ever failed, no matter, try again,fail again,fail better.">
+      <meta itemprop="image" content="/images/header.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maggie's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">搞定SQL
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-16 23:45:12" itemprop="dateCreated datePublished" datetime="2018-09-16T23:45:12+08:00">2018-09-16</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SQL/" itemprop="url" rel="index"><span itemprop="name">SQL</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<a id="more"></a>
+<h2 id="数据库-实现数据持久化以及数据管理"><a href="#数据库-实现数据持久化以及数据管理" class="headerlink" title="数据库 - 实现数据持久化以及数据管理"></a>数据库 - 实现数据持久化以及数据管理</h2><ul>
+<li>持久化 将数据保存到（在掉电情况下）能够长久保存数据的存储介质中<h4 id="数据库的分类"><a href="#数据库的分类" class="headerlink" title="数据库的分类"></a>数据库的分类</h4>关系型数据库(SQL) 、非关系型数据库(NoSQL)<h4 id="关系型数据库概述"><a href="#关系型数据库概述" class="headerlink" title="关系型数据库概述"></a>关系型数据库概述</h4></li>
+<li>关系型数据库发展史: 网状数据库、层次数据库、关系数据库<blockquote>
+<p>1970年，IBM的研究员E.F.Codd在Communication of the ACM上发表了名为A Relational Model of Data for Large Shared Data Banks的论文，提出了关系模型的概念，奠定了关系模型的理论基础。后来Codd又陆续发表多篇文章，论述了范式理论和衡量关系系统的12条标准，用数学理论奠定了关系数据库的基础。</p>
+</blockquote>
+</li>
+<li>理论基础：关系代数和集合论</li>
+<li>关系型数据库产品：<ul>
+<li><strong>Oracle</strong> (甲骨文公司) 目前世界上使用最为广泛的数据库管理系统，作为一个通用的数据库系统，它具有完整的数据管理功能；作为一个关系数据库，它是一个完备关系的产品；作为分布式数据库，它实现了分布式处理的功能。在Oracle最新的12c版本中，还引入了多承租方架构，使用该架构可轻松部署和管理数据库云。</li>
+<li><strong>DB2</strong>   (IBM) 主要运行于Unix（包括IBM自家的AIX）、Linux、以及Windows服务器版等系统的关系数据库产品。DB2历史悠久且被认为是最早使用SQL的数据库产品，它拥有较为强大的商业智能功能。</li>
+<li><strong>SQLServer</strong> (Microsoft)最初适用于中小企业的数据管理，但是近年来它的应用范围有所扩展，部分大企业甚至是跨国公司也开始基于它来构建自己的数据管理系统。</li>
+<li><strong>MySQL</strong> MySQL是开放源代码的，任何人都可以在GPL（General Public License）的许可下下载并根据个性化的需要对其进行修改。MySQL因为其速度、可靠性和适应性而备受关注。</li>
+<li><strong>Sybase</strong></li>
+<li><strong>PostgreSQL</strong>  在BSD许可证下发行的开发源代码的关系数据库产品。</li>
+</ul>
+</li>
+<li><p>具体表象:用二维表来保存数据</p>
+<ul>
+<li>行(记录)</li>
+<li>列(字段)</li>
+<li>主键列:能够唯一标识一条记录的列，例如：学生学号</li>
+</ul>
+</li>
+<li><p>编程语言:SQL - 结构化查询语言</p>
+<ul>
+<li>DDL 数据定义语言 create / drop / alter</li>
+<li>DML 数据操作语言 insert / delete / update / select</li>
+<li>DCL 数据控制语言 grant / revoke</li>
+</ul>
+</li>
+</ul>
+<h4 id="ER图-实体关系图-概念模型图"><a href="#ER图-实体关系图-概念模型图" class="headerlink" title="ER图(实体关系图/概念模型图)"></a>ER图(实体关系图/概念模型图)</h4><p>矩形框：实体</p>
+<p>椭圆框：实体的属性</p>
+<p>菱形框：实体之间的关系</p>
+<p>关系的重数：一对一/一对多/多对多</p>
+<p>画图工具：PowerDesigner</p>
+<h4 id="linux环境下启动Mariadb"><a href="#linux环境下启动Mariadb" class="headerlink" title="linux环境下启动Mariadb"></a>linux环境下启动Mariadb</h4><h5 id="启动和查看程序进程"><a href="#启动和查看程序进程" class="headerlink" title="启动和查看程序进程"></a>启动和查看程序进程</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">启动 ——&gt; 查看是否有进程(4个方法)</span><br><span class="line">方法4. systemctl status mariadb</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/16626645-37289b825743bdde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ol start="2">
+<li><strong>查看数据库版本</strong></li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/16626645-d10dddf25dce47ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="连接navicat可视化界面"><a href="#连接navicat可视化界面" class="headerlink" title="连接navicat可视化界面"></a>连接navicat可视化界面</h4><p><img src="https://upload-images.jianshu.io/upload_images/16626645-35f0a66c34e112b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li><strong>==第一步==</strong>：连接<br><img src="https://upload-images.jianshu.io/upload_images/16626645-8dfab6d2dd32fca2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">密码是：该用户登录的密码</span><br><span class="line">点击连接测试 ——&gt; 成功后点击连接</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>==第二步==</strong>：授予root所有权限<br><img src="https://upload-images.jianshu.io/upload_images/16626645-ba27de3a56b51d48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+</ul>
+<h4 id="SQL结构化查询语言-Mysql"><a href="#SQL结构化查询语言-Mysql" class="headerlink" title="SQL结构化查询语言(Mysql)"></a>SQL结构化查询语言(Mysql)</h4><p><strong>注意：</strong></p>
+<ul>
+<li>给数据库和表命名时尽量使用小写;</li>
+<li>作为筛选条件的字符串是否区分大小，看校对规则(collate utf8_general_ci    ci——&gt; case insensitive) </li>
+<li>数据库中的对象通常会用前缀加以区分</li>
+</ul>
+<h5 id="数据库增删以及表格增删改"><a href="#数据库增删以及表格增删改" class="headerlink" title="数据库增删以及表格增删改"></a>数据库增删以及表格增删改</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line">-- 如果存在名为school的数据库就删除它</span><br><span class="line">drop database if exists school;</span><br><span class="line"></span><br><span class="line">-- 创建名为school的数据库并设置默认的字符集和排序方式</span><br><span class="line">create database school default charset utf8 collate utf8_bin_ci;</span><br><span class="line"></span><br><span class="line">-- 切换到school数据库上下文环境</span><br><span class="line">use school;</span><br><span class="line"></span><br><span class="line">-- 创建学院表</span><br><span class="line">create table tb_college</span><br><span class="line">(</span><br><span class="line">collid int not null auto_increment comment &apos;编号&apos;,</span><br><span class="line">collname varchar(50) not null comment &apos;名称&apos;,</span><br><span class="line">collmaster varchar(20) not null comment &apos;院长&apos;,</span><br><span class="line">collweb varchar(511) default &apos;&apos; comment &apos;网站&apos;,</span><br><span class="line">primary key (collid)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">-- 创建学生表</span><br><span class="line">create table tb_student</span><br><span class="line">(</span><br><span class="line">stuid int not null comment &apos;学号&apos;,</span><br><span class="line">stuname varchar(20) not null comment &apos;姓名&apos;,</span><br><span class="line">stusex bit default 1 comment &apos;性别&apos;,</span><br><span class="line">stubirth date not null comment &apos;出生日期&apos;,</span><br><span class="line">stuaddr varchar(255) default &apos;&apos; comment &apos;籍贯&apos;,</span><br><span class="line">collid int not null comment &apos;所属学院&apos;,</span><br><span class="line">primary key (stuid),</span><br><span class="line">foreign key (collid) references tb_college (collid)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">-- alter table tb_student add constraint fk_student_collid foreign key (collid) references tb_college (collid);</span><br><span class="line"></span><br><span class="line">-- 创建教师表</span><br><span class="line">create table tb_teacher</span><br><span class="line">(</span><br><span class="line">teaid int not null comment &apos;工号&apos;,</span><br><span class="line">teaname varchar(20) not null comment &apos;姓名&apos;,</span><br><span class="line">teatitle varchar(10) default &apos;助教&apos; comment &apos;职称&apos;,</span><br><span class="line">collid int not null comment &apos;所属学院&apos;,</span><br><span class="line">primary key (teaid),</span><br><span class="line">foreign key (collid) references tb_college (collid)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">-- 创建课程表</span><br><span class="line">create table tb_course</span><br><span class="line">(</span><br><span class="line">couid int not null comment &apos;编号&apos;,</span><br><span class="line">couname varchar(50) not null comment &apos;名称&apos;,</span><br><span class="line">coucredit int not null comment &apos;学分&apos;,</span><br><span class="line">teaid int not null comment &apos;授课老师&apos;,</span><br><span class="line">primary key (couid),</span><br><span class="line">foreign key (teaid) references tb_teacher (teaid)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">-- 创建选课记录表</span><br><span class="line">create table tb_score</span><br><span class="line">(</span><br><span class="line">scid int auto_increment comment &apos;选课记录编号&apos;,</span><br><span class="line">stuid int not null comment &apos;选课学生&apos;,</span><br><span class="line">couid int not null comment &apos;所选课程&apos;,</span><br><span class="line">scdate datetime comment &apos;选课时间日期&apos;,</span><br><span class="line">scmark decimal(4,1) comment &apos;考试成绩&apos;,</span><br><span class="line">primary key (scid),</span><br><span class="line">foreign key (stuid) references tb_student (stuid),</span><br><span class="line">foreign key (couid) references tb_course (couid)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">-- 添加唯一性约束（一个学生选某个课程只能选一次）</span><br><span class="line">alter table tb_score add constraint uni_score_stuid_couid unique (stuid, couid);</span><br><span class="line"></span><br><span class="line">-- 插入学院数据</span><br><span class="line">insert into tb_college (collname, collmaster, collweb) values </span><br><span class="line">(&apos;计算机学院&apos;, &apos;左冷禅&apos;, &apos;http://www.abc.com&apos;),</span><br><span class="line">(&apos;外国语学院&apos;, &apos;岳不群&apos;, &apos;http://www.xyz.com&apos;),</span><br><span class="line">(&apos;经济管理学院&apos;, &apos;风清扬&apos;, &apos;http://www.foo.com&apos;);</span><br><span class="line"></span><br><span class="line">-- 插入学生数据</span><br><span class="line">insert into tb_student (stuid, stuname, stusex, stubirth, stuaddr, collid) values</span><br><span class="line">(1001, &apos;杨逍&apos;, 1, &apos;1990-3-4&apos;, &apos;四川成都&apos;, 1),</span><br><span class="line">(1002, &apos;任我行&apos;, 1, &apos;1992-2-2&apos;, &apos;湖南长沙&apos;, 1),</span><br><span class="line">(1033, &apos;王语嫣&apos;, 0, &apos;1989-12-3&apos;, &apos;四川成都&apos;, 1),</span><br><span class="line">(1572, &apos;岳不群&apos;, 1, &apos;1993-7-19&apos;, &apos;陕西咸阳&apos;, 1),</span><br><span class="line">(1378, &apos;纪嫣然&apos;, 0, &apos;1995-8-12&apos;, &apos;四川绵阳&apos;, 1),</span><br><span class="line">(1954, &apos;林平之&apos;, 1, &apos;1994-9-20&apos;, &apos;福建莆田&apos;, 1),</span><br><span class="line">(2035, &apos;东方不败&apos;, 1, &apos;1988-6-30&apos;, null, 2),</span><br><span class="line">(3011, &apos;林震南&apos;, 1, &apos;1985-12-12&apos;, &apos;福建莆田&apos;, 3),</span><br><span class="line">(3755, &apos;项少龙&apos;, 1, &apos;1993-1-25&apos;, null, 3),</span><br><span class="line">(3923, &apos;杨不悔&apos;, 0, &apos;1985-4-17&apos;, &apos;四川成都&apos;, 3);</span><br><span class="line"></span><br><span class="line">-- 插入老师数据</span><br><span class="line">insert into tb_teacher (teaid, teaname, teatitle, collid) values </span><br><span class="line">(1122, &apos;张三丰&apos;, &apos;教授&apos;, 1),</span><br><span class="line">(1133, &apos;宋远桥&apos;, &apos;副教授&apos;, 1),</span><br><span class="line">(1144, &apos;杨逍&apos;, &apos;副教授&apos;, 1),</span><br><span class="line">(2255, &apos;范遥&apos;, &apos;副教授&apos;, 2),</span><br><span class="line">(3366, &apos;韦一笑&apos;, &apos;讲师&apos;, 3);</span><br><span class="line"></span><br><span class="line">-- 插入课程数据</span><br><span class="line">insert into tb_course (couid, couname, coucredit, teaid) values </span><br><span class="line">(1111, &apos;Python程序设计&apos;, 3, 1122),</span><br><span class="line">(2222, &apos;Web前端开发&apos;, 2, 1122),</span><br><span class="line">(3333, &apos;操作系统&apos;, 4, 1122),</span><br><span class="line">(4444, &apos;计算机网络&apos;, 2, 1133),</span><br><span class="line">(5555, &apos;编译原理&apos;, 4, 1144),</span><br><span class="line">(6666, &apos;算法和数据结构&apos;, 3, 1144),</span><br><span class="line">(7777, &apos;经贸法语&apos;, 3, 2255),</span><br><span class="line">(8888, &apos;成本会计&apos;, 2, 3366),</span><br><span class="line">(9999, &apos;审计学&apos;, 3, 3366);</span><br><span class="line"></span><br><span class="line">-- 插入选课数据</span><br><span class="line">insert into tb_score (stuid, couid, scdate, scmark) values </span><br><span class="line">(1001, 1111, &apos;2017-09-01&apos;, 95),</span><br><span class="line">(1001, 2222, &apos;2017-09-01&apos;, 87.5),</span><br><span class="line">(1001, 3333, &apos;2017-09-01&apos;, 100),</span><br><span class="line">(1001, 4444, &apos;2018-09-03&apos;, null),</span><br><span class="line">(1001, 6666, &apos;2017-09-02&apos;, 100),</span><br><span class="line">(1002, 1111, &apos;2017-09-03&apos;, 65),</span><br><span class="line">(1002, 5555, &apos;2017-09-01&apos;, 42),</span><br><span class="line">(1033, 1111, &apos;2017-09-03&apos;, 92.5),</span><br><span class="line">(1033, 4444, &apos;2017-09-01&apos;, 78),</span><br><span class="line">(1033, 5555, &apos;2017-09-01&apos;, 82.5),</span><br><span class="line">(1572, 1111, &apos;2017-09-02&apos;, 78),</span><br><span class="line">(1378, 1111, &apos;2017-09-05&apos;, 82),</span><br><span class="line">(1378, 7777, &apos;2017-09-02&apos;, 65.5),</span><br><span class="line">(2035, 7777, &apos;2018-09-03&apos;, 88),</span><br><span class="line">(2035, 9999, curdate(), null),</span><br><span class="line">(3755, 1111, date(now()), null),</span><br><span class="line">(3755, 8888, date(now()), null),</span><br><span class="line">(3755, 9999, &apos;2017-09-01&apos;, 92);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 添加主键约束(如果创建表时没有添加)</span><br><span class="line">alter table tb_teacher add constraint pk_teacher_teaid primary key(tea_id);</span><br><span class="line"></span><br><span class="line">-- 添加外键约束(如果创建表时没有添加)</span><br><span class="line">alter table tb_teacher add constraint fk_teacher_deptid foreign key(dept_id) references tb_department(dept_id);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果外键编号不存在，会报错</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/16626645-3442589caef34a61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h5 id="表格查询语句"><a href="#表格查询语句" class="headerlink" title="表格查询语句"></a>表格查询语句</h5><ul>
+<li>查询所有学生信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_student;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询所有课程名称及学分(投影和别名)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select couname as 课程名称, coucredit as 学分 from tb_course;</span><br><span class="line"></span><br><span class="line">select stuname as 姓名, case stusex when 1 then &apos;男&apos; else &apos;女&apos; end as &apos;性别&apos;</span><br><span class="line">from tb_student;</span><br><span class="line"></span><br><span class="line">select stuname as 姓名, if(stusex, &apos;男&apos;, &apos;女&apos;) as 性别</span><br><span class="line">from tb_student;                                       -- 仅适用于mysql</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询所有女学生的姓名和出生日期(筛选)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select stuname as 学生姓名 , stubirth as 出生日期 from tb_student</span><br><span class="line">where stusex = 0;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询所有80后学生的姓名、性别和出生日期(筛选)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select stuname, stusex, stubirth from tb_student</span><br><span class="line">where stubirth between &apos;1980-1-1&apos; and &apos;1989-12-31&apos;;</span><br><span class="line"></span><br><span class="line">select stuname, stusex, stubirth from tb_student</span><br><span class="line">where stubirth&gt;&apos;1980-1-1&apos; and stubirth&lt;&apos;1989-12-31&apos;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询姓”杨“的学生姓名和性别(模糊)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select stuname, stusex from tb_student</span><br><span class="line">where stuname like &apos;林%&apos;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询姓”杨“名字两个字的学生姓名和性别(模糊)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select stuname, stusex from tb_student</span><br><span class="line">where stuname like &apos;杨_&apos;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询姓”杨“名字三个字的学生姓名和性别(模糊)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select stuname,stusex from tb_student</span><br><span class="line">where stuname like &apos;杨__&apos;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询名字中有”不“字或“嫣”字的学生的姓名(模糊)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select stuname from tb_student</span><br><span class="line">where stuname like &apos;%不%&apos; or &apos;%嫣%&apos;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询没有录入家庭住址的学生姓名(空值)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select stuname from tb_student where stuaddr is null;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询录入了家庭住址的学生姓名(空值)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select stuname from tb_student where stuaddr is not null;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询学生选课的所有日期(去重)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select distinct scdate from tb_score;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询学生的家庭住址(去重)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select distinct stuaddr from tb_student;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询男学生的姓名和生日按年龄从大到小排列(排序)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select stuname, stubirth from tb_student</span><br><span class="line">where stusex = 1</span><br><span class="line">order by stubirth asc;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select stuname, stubirth from tb_student</span><br><span class="line">where stusex = 1</span><br><span class="line">order by stubirth desc;</span><br><span class="line"></span><br><span class="line">select stuname, year(now())-year(stubirth) as 年龄 from tb_student</span><br><span class="line">where stusex = 1</span><br><span class="line">order by 年龄 desc, stuid;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询年龄最大的学生的出生日期(聚合函数)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select min(stubirth) from tb_student;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询年龄最小的学生的出生日期(聚合函数)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select max(stubirth) from tb_student;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询男女学生的人数(分组和聚合函数)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select stusex,count(*) from tb_student</span><br><span class="line">group by stusex;</span><br><span class="line"></span><br><span class="line">select stusex, min(stubirth) from tb_student</span><br><span class="line">group by stusex;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询课程编号为1111的课程的平均成绩(筛选和聚合函数)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select avg(scmark) from tb_score</span><br><span class="line">where couid = 1111;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询学号为1001的学生所有课程的平均分(筛选和聚合函数)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select avg(scmark) from tb_score</span><br><span class="line">where stuid = 1001;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询每个学生的学号和平均成绩(分组和聚合函数)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select stuid, avg(scmark) from tb_score</span><br><span class="line">group by stuid;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询平均成绩大于等于90分的学生的学号和平均成绩</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select stuid, avg(scmark) as 平均分 from tb_score</span><br><span class="line">group by stuid</span><br><span class="line">having 平均分&gt;90;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询年龄最大的学生的姓名(子查询)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select stuname, stubirth from tb_student;</span><br><span class="line">select stuname, min(stubirth) from tb_student;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select stuname from tb_student</span><br><span class="line">where stubirth = (select min(stubirth) from tb_student);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询年龄最大的学生姓名和年龄(子查询+运算)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select stuname, year(now()) - year(stubirth) as 年龄 from tb_student</span><br><span class="line">where stubirth = (select min(stubirth) from tb_student);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询选了两门以上的课程的学生姓名(子查询/分组条件/集合运算)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select stuname from tb_student</span><br><span class="line">where stuid in (</span><br><span class="line">	select stuid from tb_score</span><br><span class="line">	group by stuid</span><br><span class="line">	having count(stuid)&gt;2 </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询学生姓名、课程名称以及成绩(连接查询)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select stuname, couname, scmark </span><br><span class="line">from tb_student t1, tb_course t2, tb_score t3</span><br><span class="line">where t1.stuid=t3.stuid and t2.couid=t3.couid;</span><br><span class="line"></span><br><span class="line">select stuname, couname, scmark </span><br><span class="line">from tb_student t1 inner join tb_course t2 inner join tb_score t3</span><br><span class="line">on t1.stuid=t3.stuid and t2.couid=t3.couid;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询选课学生的姓名和平均成绩(子查询和连接查询)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select stuname, 平均成绩 from tb_student t1,(select stuid,avg(scmark) as 平均成绩 from tb_score</span><br><span class="line">group by stuid) t2</span><br><span class="line">where t1.stuid = t2.stuid;</span><br><span class="line"></span><br><span class="line">select stuname, 平均成绩 from tb_student t1 inner join (select stuid,avg(scmark) as 平均成绩 from tb_score</span><br><span class="line">group by stuid) t2</span><br><span class="line">on t1.stuid = t2.stuid;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询每个学生的姓名和选课数量(左外连接和子查询)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">select stuname, 选课数量 </span><br><span class="line">from tb_student t1 inner join (select stuid,count(couid) as 选课数量 from tb_score</span><br><span class="line">group by stuid) t2</span><br><span class="line">on t1.stuid=t2.stuid</span><br><span class="line">order by 选课数量 desc</span><br><span class="line">limit 5 offset 2;  -- 跳过2条查5条</span><br><span class="line"></span><br><span class="line">select stuname, ifnull(选课数量,0) </span><br><span class="line">from tb_student t1 left outer join (select stuid,count(couid) as 选课数量 from tb_score</span><br><span class="line">group by stuid) t2</span><br><span class="line">on t1.stuid=t2.stuid</span><br><span class="line">order by 选课数量 desc</span><br><span class="line">limit 1,1;    -- 跳过第一查第二条</span><br></pre></td></tr></table></figure>
+<h5 id="DCL-授予权限-grant-to-和召回权限-revoke-from"><a href="#DCL-授予权限-grant-to-和召回权限-revoke-from" class="headerlink" title="DCL 授予权限(grant to)和召回权限(revoke from)"></a>DCL 授予权限(grant to)和召回权限(revoke from)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create user &apos;hellokitty&apos;@&apos;%&apos; identified by &apos;123123&apos;; -- &apos;用户名&apos;@&apos;IP地址&apos;</span><br><span class="line"></span><br><span class="line">grant all privileges on hrs.* to &apos;hellokitty&apos;@&apos;%&apos;; -- 把hrs数库的所有权限给新建的用户</span><br><span class="line"></span><br><span class="line">-- 召回新用户的添加、删除、更新的权限</span><br><span class="line">revoke insert, delete, update on hrs.* from &apos;hellokitty&apos;@&apos;%&apos;;</span><br><span class="line"></span><br><span class="line">drop user &apos;hellokitty&apos;@&apos;%&apos;; -- 删掉新用户</span><br></pre></td></tr></table></figure>
+<h5 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h5><ul>
+<li>查询的快照（简化查询操作）</li>
+<li>通过视图可以将用户的访问权限限制到某些指定的列上</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-- 创建视图</span><br><span class="line">create view vw_emp_dept as </span><br><span class="line">select eno, ename, dname from tb_emp t1 inner join tb_dept t2 on t1.dno=t2.dno;</span><br><span class="line">-- 使用视图</span><br><span class="line">select ename, dname from vw_emp_dept;</span><br><span class="line">-- 删除视图</span><br><span class="line">drop view vw_emp_dept;</span><br></pre></td></tr></table></figure>
+<h5 id="索引-index"><a href="#索引-index" class="headerlink" title="索引(index)"></a>索引(index)</h5><ul>
+<li>索引可以加速查询所以应该在经常用于查询筛选条件的列上建立索引</li>
+<li>索引会使用额外的存储空间而且会让增删改变得更慢（因为要更新索引）</li>
+<li>所以不能够滥用索引</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 创建索引</span><br><span class="line">create index idx_emp_ename on tb_emp (ename);</span><br><span class="line">-- 删除索引</span><br><span class="line">drop index idx_emp_ename on tb_emp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>explain生成执行计划</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">explain select eno, ename from tb_emp where eno=7800;</span><br><span class="line">explain select eno, ename from tb_emp where eno&lt;&gt;7900;</span><br><span class="line">explain select eno, ename from tb_emp where ename=&apos;张三丰&apos;;</span><br><span class="line">explain select eno, ename from tb_emp where ename like &apos;张%&apos;;</span><br><span class="line">explain select eno, ename from tb_emp where ename like &apos;%张&apos;;</span><br><span class="line">explain select eno, ename from tb_emp where ename&lt;&gt;&apos;张三丰&apos;;</span><br><span class="line">如果在执行计划中，type类型是all 表示查询语句效率最差，range 次之，const 最好</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/16626645-136ec897e968aabe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h5 id="触发器-trigger"><a href="#触发器-trigger" class="headerlink" title="触发器(trigger)"></a>触发器(trigger)</h5><ul>
+<li>为什么不用触发器：<blockquote>
+<p>  在执行增删改操作时可以触发其他的级联操作，在数据量很大的情况下，会导致“锁表”现象，但是有可能导致“锁表”现象，实际开发中应该尽量避免使用触发器</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-- update tb_dept set dno=11 where dno=10;</span><br><span class="line">-- delete from tb_dept where dno=11;</span><br><span class="line"></span><br><span class="line">delimiter $$</span><br><span class="line"></span><br><span class="line">create trigger tr_dept_update </span><br><span class="line">after update on tb_dept for each row</span><br><span class="line">begin</span><br><span class="line">	update tb_emp set dno=new.dno where dno=old.dno;</span><br><span class="line">end$$</span><br><span class="line"></span><br><span class="line">delimiter ;</span><br><span class="line"></span><br><span class="line">drop trigger tr_dept_update;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>替代方案：</li>
+</ul>
+<blockquote>
+<p>在添加外键时设置级联操作cascade<br>(cascade 表示级联操作，就是说，如果主键表中被参考字段更新，外键表中也更新，主键表中的记录被删除，外键表中改行也相应删除)<br>默认是 on delete restrict 即不能级联操作</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/16626645-37d9f4c5f586a555.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h5 id="事务（transaction）"><a href="#事务（transaction）" class="headerlink" title="事务（transaction）"></a>事务（transaction）</h5><p>把多个增删改的操作做成不可分割的原子性操作，要么全部都做，要么全都不做</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">begin; -- 开启事务</span><br><span class="line">delete from tb_emp;</span><br><span class="line">commit; -- 提交(事务中的所有操作全都生效)</span><br><span class="line">rollback; -- 回滚(事务中的所有操作全部撤销)</span><br></pre></td></tr></table></figure>
+<h5 id="（存储）过程-函数"><a href="#（存储）过程-函数" class="headerlink" title="（存储）过程/函数"></a>（存储）过程/函数</h5><blockquote>
+<p>把一系列的SQL可以封装到一个过程中，而且可以加上分支和循环，将来通过过程的名字直接调用过程即可，因为创建过程时已经提前编译了SQL语句，所以比直接执行SQL语句性能更好</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-- 创建存储过程</span><br><span class="line">delimiter $$</span><br><span class="line"></span><br><span class="line">create procedure sp_dept_avg_sal(deptno int, out avgsal float)</span><br><span class="line">begin</span><br><span class="line">	select avg(sal) into avgsal from tb_emp where dno=deptno;</span><br><span class="line">end$$</span><br><span class="line"></span><br><span class="line">delimiter ;</span><br><span class="line"></span><br><span class="line">-- 调用存储过程</span><br><span class="line">call sp_dept_avg_sal(20, @a);</span><br><span class="line"></span><br><span class="line">-- 查找存储在@a变量里的数据</span><br><span class="line">select @a;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/16/Web/" rel="next" title="Web前端概述">
+                <i class="fa fa-chevron-left"></i> Web前端概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpeg" alt="Maggie Wu">
+            
+              <p class="site-author-name" itemprop="name">Maggie Wu</p>
+              <div class="site-description motion-element" itemprop="description">ever tried, ever failed, no matter, try again,fail again,fail better.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/MaggieWu01" title="GitHub &rarr; https://github.com/MaggieWu01" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.jianshu.com/u/02a78209b08f" title="简书 &rarr; https://www.jianshu.com/u/02a78209b08f" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库-实现数据持久化以及数据管理"><span class="nav-number">1.</span> <span class="nav-text">数据库 - 实现数据持久化以及数据管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库的分类"><span class="nav-number">1.0.1.</span> <span class="nav-text">数据库的分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关系型数据库概述"><span class="nav-number">1.0.2.</span> <span class="nav-text">关系型数据库概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ER图-实体关系图-概念模型图"><span class="nav-number">1.0.3.</span> <span class="nav-text">ER图(实体关系图/概念模型图)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#linux环境下启动Mariadb"><span class="nav-number">1.0.4.</span> <span class="nav-text">linux环境下启动Mariadb</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#启动和查看程序进程"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">启动和查看程序进程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连接navicat可视化界面"><span class="nav-number">1.0.5.</span> <span class="nav-text">连接navicat可视化界面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL结构化查询语言-Mysql"><span class="nav-number">1.0.6.</span> <span class="nav-text">SQL结构化查询语言(Mysql)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库增删以及表格增删改"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">数据库增删以及表格增删改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#表格查询语句"><span class="nav-number">1.0.6.2.</span> <span class="nav-text">表格查询语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DCL-授予权限-grant-to-和召回权限-revoke-from"><span class="nav-number">1.0.6.3.</span> <span class="nav-text">DCL 授予权限(grant to)和召回权限(revoke from)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#视图"><span class="nav-number">1.0.6.4.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#索引-index"><span class="nav-number">1.0.6.5.</span> <span class="nav-text">索引(index)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#触发器-trigger"><span class="nav-number">1.0.6.6.</span> <span class="nav-text">触发器(trigger)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#事务（transaction）"><span class="nav-number">1.0.6.7.</span> <span class="nav-text">事务（transaction）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（存储）过程-函数"><span class="nav-number">1.0.6.8.</span> <span class="nav-text">（存储）过程/函数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maggie Wu</span>
+
+  
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.0</div>
+
+
+
+-->
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
